@@ -1,27 +1,61 @@
 import React from 'react';
 import { Row, Col, Media, Image, Label, Well } from 'react-bootstrap';
+import PopUp from './PopUp';
 import '../styles/cards.css';
 
 export default class CardsList extends React.Component {
+  constructor(props){
+    super(props);
+
+    this.close = this.close.bind(this);
+    this.open = this.open.bind(this);
+
+    this.state = {
+      showModal: false,
+      activeItem: 0
+    }
+  }
+
+  close() {
+    this.setState({ showModal: false });
+  }
+
+  open(index) {
+    this.setState({ showModal: true, activeItem: index});
+    console.log("Clicked: " + index)
+  }
 
   render() {
     const AllCards = data.map((SingleCard, index) => 
-      <Col md={4} sm={6} xs={12} key={index}>
-        <div className="rounded-card">
+      <Col md={6} sm={6} xs={12} key={index}>
+        <div className="rounded-card" onClick={() => this.open(index)}>
           <Media>
             <Media.Left>
-              <Image width={64} height={64} src={SingleCard.thumbnail_url} circle />
+              <Image width={84} height={84} src={SingleCard.thumbnail_url} circle />
             </Media.Left>
             <Media.Body>
               <Media.Heading>{SingleCard.full_name}</Media.Heading>
-              <div>
-                <span className="bold">{SingleCard.hourly_rate}</span><span> {SingleCard.hourly_rate_currency + "/hr"}</span>
+              <Media.Heading className="small-head">
+                Coderbunker:
+                {
+                  SingleCard.organizations.Coderbunker.map((position, index) =>
+                  index===0?
+                  <span key={index}> {position}</span>:
+                  <span key={index}>, {position}</span>
+                )
+                }
+              </Media.Heading>
+              <div style={{marginTop: 10}}>
+                <span className="bold">{SingleCard.hourly_rate}</span>
+                <span> {SingleCard.hourly_rate_currency + " / hr"}</span>
               </div>
-              <p>
+              <div className="clampMe" style={{marginTop: 10}}>
                 {SingleCard.keywords.map((keyword, index) => 
-                <Label bsStyle="success" className="skill-label" key={index}>{keyword}</Label>
+                <Label bsStyle="success" className="skill-label" key={index}>
+                  {keyword}
+                </Label>
               )}
-              </p>
+              </div>
             </Media.Body>
           </Media>
         </div>
@@ -33,12 +67,17 @@ export default class CardsList extends React.Component {
         <Row>
           {this.props.data===[]? <div>Loading …</div>: AllCards}
         </Row>
+        <PopUp
+          showModal={this.state.showModal} 
+          close={this.close}
+          data={data[this.state.activeItem]}
+        />
       </div>
     )
   }
 }
 
-
+//MOCK DATA
 const data = []
 
 const dataObject = {
