@@ -38,11 +38,11 @@ export default class PopUp extends React.Component {
           </div>
           <div className="body-text">
             <h5>Github</h5>
-            <a href={"https://www.github.com/" + this.props.data.github}>{this.props.data.github}</a>
+            <a href={"https://www.github.com/" + this.props.data.github} target="_blank">{this.props.data.github}</a>
           </div>
           <div className="body-text">
             <h5>LinkedIn</h5>
-            <a href={this.props.data.linkedin}>{this.props.data.linkedin}</a>
+            <a href={this.props.data.linkedin} target="_blank">{this.props.data.linkedin}</a>
           </div>
           <div className="body-text">
             <h5>Phone</h5>
