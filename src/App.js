@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import './App.css';
-import search from 'search';
-import cards from 'cards';
+import Search from './components/Search';
+import CardsList from './components/CardsList';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <search/>
-        <cards/>
+        <Search />
+        <CardsList />
       </div>
     );
   }
