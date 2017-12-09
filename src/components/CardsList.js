@@ -1,14 +1,14 @@
 import React from 'react';
-import axios from 'axios';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, Media } from 'react-bootstrap';
 
 export default class CardsList extends React.Component {
 
   render() {
-    const AllCards = this.props.data.map((single))
+    // const AllCards = this.props.data.map((SinglCard, index)
+    // )
     return (
       <Row>
-        {AllCards}
+        {/* {AllCards} */}
       </Row>
     )
   }
