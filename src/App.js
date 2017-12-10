@@ -3,12 +3,15 @@ import axios from 'axios';
 import './App.css';
 import SearchBar from './components/SearchBar';
 import CardsList from './components/CardsList';
+import Search from './components/SearchBar';
 
 class App extends Component {
   constructor(props) {
     super(props);
+    this.onChange = this.onChange.bind(this);
     this.state = {
-      data: []
+      data: [],
+      searchTerm: ''
     }
   }
 
@@ -21,12 +24,17 @@ class App extends Component {
     });
   }
 
+  onChange(event) {
+    this.setState({searchTerm: event.target.value})
+    console.log("Search:" + this.state.searchTerm)
+  }
+
   render() {
     console.log(this.state.data)
     return (
       <div className="App">
-        <SearchBar data={this.state.data}/>
-        <CardsList data={this.state.data}/>
+        <SearchBar data={this.state.data} updateFilter={this.onChange}/>
+        <CardsList data={this.state.data} searchTerm={this.state.searchTerm}/>
       </div>
     );
   }

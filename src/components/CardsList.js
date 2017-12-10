@@ -1,8 +1,11 @@
 import React from 'react';
+import {createFilter} from 'react-search-input';
 import { Row, Col, Media, Image, Label } from 'react-bootstrap';
 import PopUp from './PopUp';
 import PageLoad from './PageLoad';
 import '../styles/cards.css';
+
+const KEYS_TO_FILTERS = ['full_name', 'keywords', 'hourly_rate']
 
 export default class CardsList extends React.Component {
   constructor(props){
@@ -27,7 +30,9 @@ export default class CardsList extends React.Component {
   }
 
   render() {
-    const AllCards = this.props.data.map((SingleCard, index) => 
+    const AllCards = this.props.data.
+      filter(createFilter(this.props.searchTerm, KEYS_TO_FILTERS)).
+      map((SingleCard, index) => 
       <Col md={6} sm={6} xs={12} key={index}>
         <div className="rounded-card" onClick={() => this.open(index)}>
           <Media>
