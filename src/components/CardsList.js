@@ -1,6 +1,7 @@
 import React from 'react';
 import { Row, Col, Media, Image, Label } from 'react-bootstrap';
 import PopUp from './PopUp';
+import PageLoad from './PageLoad';
 import '../styles/cards.css';
 
 export default class CardsList extends React.Component {
@@ -65,12 +66,12 @@ export default class CardsList extends React.Component {
     return (
       <div className="container card-container">
         <Row>
-          {this.props.data===[]? <div>Loading …</div>: AllCards}
+          {this.props.data===[]? <div />: AllCards}
         </Row>
 
         {
           this.props.data.length===0? 
-          <div>Loading …</div>: 
+          <PageLoad />: 
           <PopUp
             showModal={this.state.showModal} 
             close={this.close}
