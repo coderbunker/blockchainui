@@ -44,7 +44,11 @@ export default class DropdownButtons extends React.Component {
           className="dropdown" id="bg-nested-dropdown"
         >
           {this.props.skillsList.map((skill, index) => 
-            <MenuItem eventKey={index} key={index} onClick={() => this.changeActiveTwo(index)}>{skill}</MenuItem>
+            <MenuItem 
+              eventKey={index+1} 
+              key={index} 
+              onClick={() => {this.changeActiveTwo(index); this.props.addSearchTerm(skill)}}>{skill}
+            </MenuItem>
           )}
         </DropdownButton>
       </div>

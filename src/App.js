@@ -10,6 +10,7 @@ class App extends Component {
     this.onChange = this.onChange.bind(this);
     this.lowSort = this.lowSort.bind(this);
     this.highSort = this.highSort.bind(this);
+    this.addSearchTerm = this.addSearchTerm.bind(this);
     this.state = {
       data: [],
       searchTerm: ''
@@ -17,7 +18,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    axios.get('https://gist.githubusercontent.com/robert1ridley/02e30445d1e437f2c0744dacce1329ea/raw/8a25cdf46e6009ad1ecc13d1082d73475872bc22/mockdata.json')
+    axios.get('https://gist.githubusercontent.com/robert1ridley/02e30445d1e437f2c0744dacce1329ea/raw/a24a630604c94ace2a4dbd2b390141186f7f0a10/mockdata.json')
     .then((response) => {
       console.log(response)
       this.setState({data: response.data})
@@ -27,7 +28,6 @@ class App extends Component {
 
   onChange(event) {
     this.setState({searchTerm: event.target.value})
-    console.log("Search:" + this.state.searchTerm)
   }
 
   lowSort(){
@@ -46,6 +46,12 @@ class App extends Component {
   })
   }
 
+  addSearchTerm(text){
+    text!=="All Skills"?
+    this.setState({searchTerm: text}):
+    this.setState({searchTerm: ''})
+  }
+
   render() {
     console.log(this.state.data)
     return (
@@ -54,6 +60,7 @@ class App extends Component {
           updateFilter={this.onChange}
           lowSort={this.lowSort}
           highSort={this.highSort}
+          addSearchTerm={this.addSearchTerm}
         />
         <CardsList 
           data={this.state.data} 

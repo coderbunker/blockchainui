@@ -1,5 +1,5 @@
 import React from 'react';
-import {createFilter} from 'react-search-input';
+import  {createFilter} from 'react-search-input';
 import { Row, Col, Media, Image, Label } from 'react-bootstrap';
 import PopUp from './PopUp';
 import PageLoad from './PageLoad';
@@ -16,7 +16,7 @@ export default class CardsList extends React.Component {
 
     this.state = {
       showModal: false,
-      activeItem: 0
+      activeItem: ''
     }
   }
 
@@ -26,15 +26,14 @@ export default class CardsList extends React.Component {
 
   open(index) {
     this.setState({ showModal: true, activeItem: index});
-    console.log("Clicked: " + index)
   }
 
   render() {
-    const AllCards = this.props.data.
-      filter(createFilter(this.props.searchTerm, KEYS_TO_FILTERS)).
-      map((SingleCard, index) => 
-      <Col md={6} sm={6} xs={12} key={index}>
-        <div className="rounded-card" onClick={() => this.open(index)}>
+    const AllCards = this.props.data
+    .filter(createFilter(this.props.searchTerm, KEYS_TO_FILTERS))
+    .map((SingleCard) => 
+      <Col md={6} sm={6} xs={12} key={SingleCard.full_name}>
+        <div className="rounded-card" onClick={() => this.open(SingleCard.full_name)}>
           <Media>
             <Media.Left>
               <Image width={84} height={84} src={SingleCard.thumbnail_url} circle />
@@ -80,7 +79,11 @@ export default class CardsList extends React.Component {
           <PopUp
             showModal={this.state.showModal} 
             close={this.close}
-            data={this.props.data[this.state.activeItem]}
+            data={
+              this.state.activeItem===''?
+              this.props.data[0]:
+              this.props.data[this.props.data.findIndex(p => p.full_name == this.state.activeItem)]
+            }
           />
         }
       </div>

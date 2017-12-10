@@ -22,6 +22,7 @@ export default class Search extends React.Component {
             onChange={this.props.updateFilter} 
             lowSort={this.props.lowSort}
             highSort={this.props.highSort}
+            addSearchTerm={this.props.addSearchTerm}
           />
         </div>
       </div>
