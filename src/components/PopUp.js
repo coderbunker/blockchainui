@@ -3,6 +3,7 @@ import { Modal, Button, Media, Image } from 'react-bootstrap';
 
 export default class PopUp extends React.Component {
   render() {
+    console.log(this.props.data)
     return (
       <Modal show={this.props.showModal} onHide={this.props.close}>
         <Modal.Body>

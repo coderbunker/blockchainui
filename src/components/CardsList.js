@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col, Media, Image, Label, Well } from 'react-bootstrap';
+import { Row, Col, Media, Image, Label } from 'react-bootstrap';
 import PopUp from './PopUp';
 import '../styles/cards.css';
 
@@ -26,7 +26,7 @@ export default class CardsList extends React.Component {
   }
 
   render() {
-    const AllCards = data.map((SingleCard, index) => 
+    const AllCards = this.props.data.map((SingleCard, index) => 
       <Col md={6} sm={6} xs={12} key={index}>
         <div className="rounded-card" onClick={() => this.open(index)}>
           <Media>
@@ -67,59 +67,17 @@ export default class CardsList extends React.Component {
         <Row>
           {this.props.data===[]? <div>Loading …</div>: AllCards}
         </Row>
-        <PopUp
-          showModal={this.state.showModal} 
-          close={this.close}
-          data={data[this.state.activeItem]}
-        />
+
+        {
+          this.props.data.length===0? 
+          <div>Loading …</div>: 
+          <PopUp
+            showModal={this.state.showModal} 
+            close={this.close}
+            data={this.props.data[this.state.activeItem]}
+          />
+        }
       </div>
     )
   }
 }
-
-//MOCK DATA
-const data = []
-
-const dataObject = {
-  "full_name": "Ricky Ng-Adam",
-  "rates": [
-    {"type": "consulting", "hourly": "700", "currency": "RMB"}
-  ],
-  "hourly_rate" : "700",
-  "hourly_rate_currency": "RMB",
-  "location": "31.190751,121.426261,15",
-  "email": "rngadam@coderbunker.com",
-  "linkedin": "https://www.linkedin.com/in/rngadam/",
-  "mobile": ["+86-156-1894-3215"],
-  "github": "rngadam",
-  "organizations": { 
-    "Coderbunker": ["Founder", "Lead"]
-   },
-  "thumbnail_url": "https://tse1-mm.cn.bing.net/th?id=OIP.rnG1ojcmwebKASg3fRu2rwEsEs&w=100&h=105&c=8&rs=1&qlt=90&pid=3.1&rm=2",
-  "keywords": [ 
-    "development", 
-    "testing", 
-    "architecture", 
-    "design", 
-    "R&D", 
-    "engineering", 
-    "team", 
-    "recruitment",
-    "Javascript", 
-    "Python", 
-    "C/C++", 
-    "shell",
-    "REST", 
-    "Websockets", 
-    "GraphQL", 
-    "database", 
-    "PostgreSQL", 
-    "deployment", 
-    "Linux", 
-    "Ansible"
-  ]
-  }
-
-  for (var i = 0; i < 30; i++ ){
-    data.push(dataObject)
-  }
