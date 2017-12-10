@@ -17,7 +17,12 @@ export default class Search extends React.Component {
               </InputGroup.Addon>
             </InputGroup>
           </FormGroup>
-          <Filters data={this.props.data} onChange={this.props.updateFilter}/>
+          <Filters 
+            data={this.props.data} 
+            onChange={this.props.updateFilter} 
+            lowSort={this.props.lowSort}
+            highSort={this.props.highSort}
+          />
         </div>
       </div>
     )

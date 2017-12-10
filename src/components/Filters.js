@@ -20,7 +20,11 @@ export default class Filters extends React.Component {
   })
     return (
       <div style={{textAlign: 'left'}}>
-        <DropdownButtons skillsList={skillsList}/>
+        <DropdownButtons 
+          skillsList={skillsList}
+          lowSort={this.props.lowSort}
+          highSort={this.props.highSort}
+        />
       </div>
     )
   }

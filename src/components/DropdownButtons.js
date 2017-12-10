@@ -8,36 +8,39 @@ export default class DropdownButtons extends React.Component {
     this.changeActiveOne = this.changeActiveOne.bind(this)
     this.changeActiveTwo = this.changeActiveTwo.bind(this)
     this.state = {
-      firstActiveIndex: 0,
-      secondActiveIndex: 0
+      activeIndex: 0,
+      activeText: 'Rates'
     }
   }
 
-  changeActiveOne(index){
-    this.setState({firstActiveIndex: index})
+  changeActiveOne(text){
+    this.setState({activeText: text})
   }
 
 
   changeActiveTwo(index){
-    this.setState({secondActiveIndex: index})
-    console.log(this.state.secondActiveIndex)
+    this.setState({activeIndex: index})
   }
 
   render () {
-
-    const PricesList = ["Lowest Rate First", "Highest Rate First"]
-
     return (
       <div>
-        <DropdownButton title={PricesList[this.state.firstActiveIndex]} className="dropdown" id="bg-nested-dropdown">
-          {PricesList.map((price, index) => 
-            <MenuItem eventKey={index} key={index} onClick={() => this.changeActiveOne(index)}>
-              {price}
+        <DropdownButton title={this.state.activeText} className="dropdown" id="bg-nested-dropdown">
+            <MenuItem 
+              eventKey={1}
+              onClick={() => { this.changeActiveOne("Lowest Rates"); this.props.lowSort();}}
+            >
+              Lowest Rates
             </MenuItem>
-          )}
+            <MenuItem 
+              eventKey={2}
+              onClick={() => { this.changeActiveOne("Highest Rates"); this.props.highSort();}}
+            >
+              Highest Rates
+            </MenuItem>
         </DropdownButton>
         <DropdownButton 
-          title={this.props.skillsList[this.state.secondActiveIndex]} 
+          title={this.props.skillsList[this.state.activeIndex]} 
           className="dropdown" id="bg-nested-dropdown"
         >
           {this.props.skillsList.map((skill, index) => 
