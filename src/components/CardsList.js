@@ -1,11 +1,11 @@
 import React from 'react';
 import  {createFilter} from 'react-search-input';
-import { Row, Col, Media, Image, Label } from 'react-bootstrap';
+import { Row, Col, Media } from 'react-bootstrap';
 import PopUp from './PopUp';
 import PageLoad from './PageLoad';
 import '../styles/cards.css';
 
-const KEYS_TO_FILTERS = ['full_name', 'keywords', 'hourly_rate']
+const KEYS_TO_FILTERS = ['name', 'demand hours']
 
 export default class CardsList extends React.Component {
   constructor(props){
@@ -26,40 +26,29 @@ export default class CardsList extends React.Component {
 
   open(index) {
     this.setState({ showModal: true, activeItem: index});
+    console.log(this.state.activeItem)
   }
 
   render() {
+    console.log("cards: " + this.props.data)
     const AllCards = this.props.data
     .filter(createFilter(this.props.searchTerm, KEYS_TO_FILTERS))
     .map((SingleCard) => 
-      <Col md={6} sm={6} xs={12} key={SingleCard.full_name}>
-        <div className="rounded-card" onClick={() => this.open(SingleCard.full_name)}>
+      <Col md={6} sm={6} xs={12} key={SingleCard.name}>
+        <div className="rounded-card" onClick={() => this.open(SingleCard.name)}>
           <Media>
-            <Media.Left>
-              <Image width={84} height={84} src={SingleCard.thumbnail_url} circle />
-            </Media.Left>
             <Media.Body>
-              <Media.Heading>{SingleCard.full_name}</Media.Heading>
-              <Media.Heading className="small-head">
-                Coderbunker:
-                {
-                  SingleCard.organizations.Coderbunker.map((position, index) =>
-                  index===0?
-                  <span key={index}> {position}</span>:
-                  <span key={index}>, {position}</span>
-                )
-                }
-              </Media.Heading>
+              <Media.Heading>{SingleCard.name}</Media.Heading>
+              <Media.Heading className="small-head">{SingleCard['demand hours']===8?"Mentor": "Peer"}</Media.Heading>
               <div style={{marginTop: 10}}>
-                <span className="bold">{SingleCard.hourly_rate}</span>
-                <span> {SingleCard.hourly_rate_currency + " / hr"}</span>
-              </div>
-              <div className="clampMe" style={{marginTop: 10}}>
-                {SingleCard.keywords.map((keyword, index) => 
-                <Label bsStyle="success" className="skill-label" key={index}>
-                  {keyword}
-                </Label>
-              )}
+                <Col md={6} xs={6}>
+                  <h5 className="thin">Available Hours</h5>
+                  <p>{SingleCard['spend hours']}</p>
+                </Col>
+                <Col md={6} xs={6}>
+                  <h5 className="thin">Hourly Rate</h5>
+                  <p>{SingleCard['demand hours']}</p>
+                </Col>
               </div>
             </Media.Body>
           </Media>
@@ -73,16 +62,17 @@ export default class CardsList extends React.Component {
           {this.props.data===[]? <div />: AllCards}
         </Row>
 
+        {console.log(this.props.data[0])}
         {
-          this.props.data.length===0? 
+          this.props.data===[] || this.props.data===undefined? 
           <PageLoad />: 
           <PopUp
             showModal={this.state.showModal} 
             close={this.close}
             data={
-              this.state.activeItem===''?
+              this.props.data===[]?
               this.props.data[0]:
-              this.props.data[this.props.data.findIndex(p => p.full_name == this.state.activeItem)]
+              this.props.data[this.props.data.findIndex(p => p.name === this.state.activeItem)]
             }
           />
         }

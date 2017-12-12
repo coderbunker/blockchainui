@@ -1,57 +1,38 @@
 import React from 'react';
-import { Modal, Button, Media, Image } from 'react-bootstrap';
+import { Modal, Button, Media, Col } from 'react-bootstrap';
 
 export default class PopUp extends React.Component {
   render() {
-    console.log(this.props.data)
+    console.log(this.props.data==="undefined"? "waiting": this.props.data)
     return (
       <Modal show={this.props.showModal} onHide={this.props.close}>
         <Modal.Body>
           <Media>
-            <Media.Left>
-              <Image width={84} height={84} src={this.props.data.thumbnail_url} circle />
-            </Media.Left>
             <Media.Body>
-              <Media.Heading style={{marginTop: 15}}>{this.props.data.full_name}</Media.Heading> 
-              <Media.Heading className="small-head">
-                Coderbunker:
-                {
-                  this.props.data.organizations.Coderbunker.map((position, index) =>
-                  index===0?
-                  <span key={index}> {position}</span>:
-                  <span key={index}>, {position}</span>
-                )
-                }
+              <Media.Heading className="text-center" style={{marginTop: 15}}>{this.props.data===undefined?'': this.props.data.name}</Media.Heading> 
+              <Media.Heading className="small-head text-center">
+                {this.props.data===undefined?'': 
+                this.props.data['demand hours']===8? "Mentor": "Peer"}
               </Media.Heading>
+              <Col md={6} xs={6}>
+                <div className="text-center">
+                  <h5 className="thin">Available Hours</h5>
+                  <p>{this.props.data===undefined?'': this.props.data['spend hours']}</p>
+                </div>
+              </Col>
+              <Col md={6} xs={6}>
+                <div className="text-center">
+                <h5 className="thin">Hourly Rate</h5>
+                <p>{this.props.data===undefined?'': this.props.data['demand hours']}</p>
+                </div>
+              </Col>
             </Media.Body>
           </Media>
-          <div className="body-text">
-            <h5>Skills</h5>
-            {this.props.data.keywords.map((keyword, index) => 
-                index===0?
-                <span key={index}>{keyword}</span>:
-                <span key={index}>, {keyword}</span>
-            )}
-          </div>
-          <div className="body-text">
-            <h5>Email</h5>
-            <p>{this.props.data.email}</p>
-          </div>
-          <div className="body-text">
-            <h5>Github</h5>
-            <a href={"https://www.github.com/" + this.props.data.github} target="_blank">{this.props.data.github}</a>
-          </div>
-          <div className="body-text">
-            <h5>LinkedIn</h5>
-            <a href={this.props.data.linkedin} target="_blank">{this.props.data.linkedin}</a>
-          </div>
-          <div className="body-text">
-            <h5>Phone</h5>
-            <p>{this.props.data.mobile}</p>
-          </div>
+          
         </Modal.Body>
           <div style={{textAlign: 'right'}}>
-            <Button style={{margin: 10}} onClick={this.props.close}>Close</Button>
+            <Button style={{margin: 10, color: 'white', backgroundColor: '#5cb85c', borderRadius: 0}}>Ask for help</Button>
+            <Button style={{margin: 10, borderRadius: 0}} onClick={this.props.close}>Close</Button>
           </div>
       </Modal>
     )

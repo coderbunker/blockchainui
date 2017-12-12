@@ -8,7 +8,7 @@ export default class Search extends React.Component {
     return (
       <div style={{backgroundColor: '#5cb85c'}}>
         <div className="container search-container">
-        <h1 style={{color: '#fff', fontWeight: 200}}>Search for a Collaborator</h1>
+        <h1 style={{color: '#fff', fontWeight: 200}}>Search for Help</h1>
           <FormGroup>
             <InputGroup>
               <FormControl type="text" onChange={this.props.updateFilter.bind(this)}/>
@@ -20,8 +20,8 @@ export default class Search extends React.Component {
           <Filters 
             data={this.props.data} 
             onChange={this.props.updateFilter} 
-            lowSort={this.props.lowSort}
-            highSort={this.props.highSort}
+            // lowSort={this.props.lowSort}
+            // highSort={this.props.highSort}
             addSearchTerm={this.props.addSearchTerm}
           />
         </div>

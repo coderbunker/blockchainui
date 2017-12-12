@@ -1,5 +1,5 @@
-.bold {
-  font-weight: 700
+.thin {
+  font-weight: 200
 }
 
 .card-container {
@@ -12,6 +12,7 @@
   padding: 15px;
   margin-top: 15px;
   margin-bottom: 15px;
+  background-color: white !important
 }
 
 .rounded-card:hover {
