@@ -35,19 +35,19 @@ export default class CardsList extends React.Component {
     .filter(createFilter(this.props.searchTerm, KEYS_TO_FILTERS))
     .map((SingleCard) => 
       <Col md={6} sm={6} xs={12} key={SingleCard.name}>
-        <div className="rounded-card" onClick={() => this.open(SingleCard.name)}>
+        <div className="rounded-card" onClick={() => this.open(SingleCard.skill)}>
           <Media>
             <Media.Body>
-              <Media.Heading>{SingleCard.name}</Media.Heading>
-              <Media.Heading className="small-head">{SingleCard['demand hours']===8?"Mentor": "Peer"}</Media.Heading>
+              <Media.Heading>{SingleCard.skill}</Media.Heading>
+              {/* <Media.Heading className="small-head">{SingleCard['demand hours']===8?"Mentor": "Peer"}</Media.Heading> */}
               <div style={{marginTop: 10}}>
                 <Col md={6} xs={6}>
                   <h5 className="thin">Available Hours</h5>
-                  <p>{SingleCard['spend hours']}</p>
+                  <p>{1}</p>
                 </Col>
                 <Col md={6} xs={6}>
                   <h5 className="thin">Hourly Rate</h5>
-                  <p>{SingleCard['demand hours']}</p>
+                  <p>{3}</p>
                 </Col>
               </div>
             </Media.Body>
@@ -62,17 +62,18 @@ export default class CardsList extends React.Component {
           {this.props.data===[]? <div />: AllCards}
         </Row>
 
-        {console.log(this.props.data[0])}
+        {/* {console.log(this.props.data[0])} */}
         {
           this.props.data===[] || this.props.data===undefined? 
           <PageLoad />: 
           <PopUp
             showModal={this.state.showModal} 
             close={this.close}
+            user={this.props.user}
             data={
               this.props.data===[]?
               this.props.data[0]:
-              this.props.data[this.props.data.findIndex(p => p.name === this.state.activeItem)]
+              this.props.data[this.props.data.findIndex(p => p.skill === this.state.activeItem)]
             }
           />
         }
