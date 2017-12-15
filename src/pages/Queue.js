@@ -32,7 +32,7 @@ class Skills extends Component {
         //         console.log(response.data)
         //         this.setState({ data: response.data })
         //     });
-        axios.get('http://10.1.10.236:3000/api/v1/queue')
+        axios.get('http://10.1.2.186:3000/api/v1/queue')
             .then((response) => {
                 this.setState({ data: response.data });
                 console.log(response.data);

@@ -27,7 +27,7 @@ class Skills extends Component {
     }
     this.setState({ user, skill });
     console.log(this.state.user, this.state.skill);
-    axios.get('http://10.1.10.236:3000/api/v1/skills')
+    axios.get('http://10.1.2.186:3000/api/v1/skills')
     .then((response) => {
       console.log(response)
       console.log(response.data)

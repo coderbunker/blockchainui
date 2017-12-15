@@ -3,7 +3,7 @@ import { Form, FormControl, FormGroup, Radio, Button, ControlLabel } from 'react
 
 import axios from 'axios';
 
-const host = 'http://10.1.10.236:3000/api/v1';
+const host = 'http://10.1.2.186:3000/api/v1';
 
 export default class LoginForm extends React.Component {
   constructor(){
@@ -25,7 +25,7 @@ export default class LoginForm extends React.Component {
         this.setState({ users: response.data.users })
         console.log(this.state.users);
       });
-    axios.get('http://10.1.10.236:3000/api/v1/skills')
+    axios.get('http://10.1.2.186:3000/api/v1/skills')
       .then((response) => {
         this.setState({ skills: response.data })
         console.log(this.state.skills);

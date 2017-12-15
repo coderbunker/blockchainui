@@ -26,12 +26,12 @@ export default class CardsList extends React.Component {
     }
 
     componentWillMount() {
-        axios.get('http://10.1.10.236:3000/api/v1/queue')
+        axios.get('http://10.1.2.186:3000/api/v1/queue')
             .then((response) => {
                 this.setState({ data: response.data });
                 console.log(response.data);
             });
-        axios.get(`http://10.1.10.236:3000/api/v1/users`)
+        axios.get(`http://10.1.2.186:3000/api/v1/users`)
             .then(response => {
                 console.log(response);
                 this.setState({ users: response.data.users })
