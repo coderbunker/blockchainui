@@ -6,9 +6,9 @@ import '../styles/search.css';
 export default class Search extends React.Component {
   render() {
     return (
-      <div style={{backgroundColor: '#5cb85c'}}>
+      <div >
         <div className="container search-container">
-        <h1 style={{color: '#fff', fontWeight: 200}}>Search for Help</h1>
+        <h1 style={{fontWeight: 400}}>Search for help</h1>
           <FormGroup>
             <InputGroup>
               <FormControl type="text" onChange={this.props.updateFilter.bind(this)}/>

@@ -20,7 +20,7 @@ export default class RegisterForm extends React.Component {
       <Form 
       horizontal 
       method="post" 
-      action={"http://localhost:7000/api/v1/register/"+this.state.username}
+      action={"http://localhost:3000/api/v1/register/"+this.state.username}
     >
       <FormGroup controlId="formHorizontalEmail">
         <FormControl 

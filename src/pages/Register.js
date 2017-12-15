@@ -14,9 +14,10 @@ export default class Register extends React.Component {
     }
   }
 
+
   changeActive(num){
     this.setState({
-      activeButton: num
+      activeButton: 1
     })
   }
 
@@ -25,8 +26,8 @@ export default class Register extends React.Component {
       <div style={{height:'100vh'}}>
         <Col smOffset={3} sm={6}>
           <div className="no-highlight" style={{padding: 30, marginTop: '20vh'}}>
-            <ButtonToolbar style={{marginTop: 10, marginBottom: 40}}>
-              <Button 
+            {/* <ButtonToolbar style={{marginTop: 10, marginBottom: 40}}>
+              {/* <Button 
                 bsStyle="primary" 
                 bsSize="large" 
                 style={this.state.activeButton===0? styles.active: styles.inactive} 
@@ -34,21 +35,19 @@ export default class Register extends React.Component {
                 onClick={() => this.changeActive(0)}
               >
                 Register
-              </Button>
-              <Button 
+              </Button> */}
+              {/* <Button 
+                bsStyle="primary"
                 bsSize="large" 
                 active 
-                style={this.state.activeButton===1? styles.active: styles.inactive}
+                style={styles.active}
                 onClick={() => this.changeActive(1)}
               >
                 Login
               </Button>
-            </ButtonToolbar>
-            {
-              this.state.activeButton===0?
-              <RegisterForm />:
+            </ButtonToolbar> */}
               <LoginForm />
-            }
+
           </div>
         </Col>
       </div>
