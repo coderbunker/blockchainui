@@ -6,6 +6,7 @@ import '../styles/cards.css';
 
 import axios from 'axios';
 
+var url = 'http://127.0.0.1:3000';
 
 export default class CardsList extends React.Component {
     constructor(props) {
@@ -20,7 +21,7 @@ export default class CardsList extends React.Component {
     }
 
     componentWillMount() {
-        axios.get('http://10.1.2.186:3000/api/v1/dashboard')
+        axios.get(url + '/api/v1/dashboard')
             .then((response) => {
                 this.setState({ data: response.data });
                 console.log(response.data);

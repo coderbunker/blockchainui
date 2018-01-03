@@ -8,6 +8,8 @@ import PopUp from '../components/PopUpQueue';
 
 import { Row, Col, Media, Navbar, Nav, NavItem, Button } from 'react-bootstrap';
 
+var url = 'http://127.0.0.1:3000';
+
 class Skills extends Component {
     constructor(props) {
         super(props);
@@ -32,7 +34,7 @@ class Skills extends Component {
         //         console.log(response.data)
         //         this.setState({ data: response.data })
         //     });
-        axios.get('http://10.1.2.186:3000/api/v1/queue')
+        axios.get(url + '/api/v1/queue')
             .then((response) => {
                 this.setState({ data: response.data });
                 console.log(response.data);

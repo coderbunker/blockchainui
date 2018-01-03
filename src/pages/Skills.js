@@ -6,6 +6,8 @@ import CardsList from '../components/CardsList';
 
 import { Row, Col, Media, Navbar, Nav, NavItem } from 'react-bootstrap';
 
+var url = 'http://127.0.0.1:3000';
+
 class Skills extends Component {
   constructor(props) {
     super(props);
@@ -27,7 +29,7 @@ class Skills extends Component {
     }
     this.setState({ user, skill });
     console.log(this.state.user, this.state.skill);
-    axios.get('http://10.1.2.186:3000/api/v1/skills')
+    axios.get(url + '/api/v1/skills')
     .then((response) => {
       console.log(response)
       console.log(response.data)
