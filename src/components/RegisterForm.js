@@ -1,6 +1,8 @@
 import React from 'react';
 import { Form, FormControl, FormGroup, Radio, Button } from 'react-bootstrap';
 
+import { host } from '../host.js';
+
 export default class RegisterForm extends React.Component {
   constructor(){
     super();
@@ -20,7 +22,7 @@ export default class RegisterForm extends React.Component {
       <Form 
       horizontal 
       method="post" 
-      action={"http://localhost:3000/api/v1/register/"+this.state.username}
+      action={`${host}/register/${this.state.username}`}
     >
       <FormGroup controlId="formHorizontalEmail">
         <FormControl 

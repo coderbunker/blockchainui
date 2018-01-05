@@ -6,7 +6,7 @@ import CardsList from '../components/CardsList';
 
 import { Row, Col, Media, Navbar, Nav, NavItem } from 'react-bootstrap';
 
-var url = 'http://127.0.0.1:3000';
+import { host } from '../host.js';
 
 class Skills extends Component {
   constructor(props) {
@@ -29,7 +29,7 @@ class Skills extends Component {
     }
     this.setState({ user, skill });
     console.log(this.state.user, this.state.skill);
-    axios.get(url + '/api/v1/skills')
+    axios.get(`${host}/skills`)
     .then((response) => {
       console.log(response)
       console.log(response.data)
@@ -50,6 +50,11 @@ class Skills extends Component {
     this.setState({searchTerm: ''})
   }
 
+  logout = () => {
+    window.localStorage.clear()
+    window.location.href = '/login';
+  }
+
   render() {
     console.log(this.state.data)
     return (
@@ -63,8 +68,9 @@ class Skills extends Component {
           <Nav>
             <NavItem eventKey={1} href="/skills">Skills</NavItem>
             <NavItem eventKey={2} href="/dashboard">Dashboard</NavItem>
-            <NavItem eventKey={2} href="/queue">Queue</NavItem>
-            <NavItem eventKey={2} href="/queue">| {this.state.user} : {this.state.skill} |</NavItem>
+            <NavItem eventKey={3} href="/queue">Queue</NavItem>
+            <NavItem eventKey={4} href="/queue">| {this.state.user} : {this.state.skill} |</NavItem>
+            <NavItem eventKey={5} onClick={() => this.logout()}>Logout</NavItem>
           </Nav>
         </Navbar>
         <h1>Skills</h1>

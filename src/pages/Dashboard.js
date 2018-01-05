@@ -4,9 +4,10 @@ import { Row, Col, Media, Navbar, Nav, NavItem } from 'react-bootstrap';
 import PageLoad from '../components/PageLoad';
 import '../styles/cards.css';
 
+import { host } from '../host.js';
+
 import axios from 'axios';
 
-var url = 'http://127.0.0.1:3000';
 
 export default class CardsList extends React.Component {
     constructor(props) {
@@ -21,7 +22,7 @@ export default class CardsList extends React.Component {
     }
 
     componentWillMount() {
-        axios.get(url + '/api/v1/dashboard')
+        axios.get(`${host}/dashboard`)
             .then((response) => {
                 this.setState({ data: response.data });
                 console.log(response.data);
@@ -36,6 +37,11 @@ export default class CardsList extends React.Component {
     open(index) {
         this.setState({ showModal: true, activeItem: index });
         console.log(this.state.activeItem)
+    }
+
+    logout = () => {
+        window.localStorage.clear()
+        window.location.href = '/login';
     }
 
     render() {
@@ -76,6 +82,7 @@ export default class CardsList extends React.Component {
                         <NavItem eventKey={1} href="/skills">Skills</NavItem>
                         <NavItem eventKey={2} href="/dashboard">Dashboard</NavItem>
                         <NavItem eventKey={2} href="/queue">Queue</NavItem>
+                        <NavItem eventKey={5} onClick={() => this.logout()}>Logout</NavItem>
                     </Nav>
                 </Navbar>
                 <div className="container card-container">

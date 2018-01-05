@@ -6,9 +6,10 @@ import CardsList from '../components/CardsList';
 import PageLoad from '../components/PageLoad';
 import PopUp from '../components/PopUpQueue';
 
+import { host } from '../host.js';
+
 import { Row, Col, Media, Navbar, Nav, NavItem, Button } from 'react-bootstrap';
 
-var url = 'http://127.0.0.1:3000';
 
 class Skills extends Component {
     constructor(props) {
@@ -28,16 +29,10 @@ class Skills extends Component {
     }
 
     async componentWillMount() {
-        // axios.get('http://10.1.10.236:3000/api/v1/skills')
-        //     .then((response) => {
-        //         console.log(response)
-        //         console.log(response.data)
-        //         this.setState({ data: response.data })
-        //     });
-        axios.get(url + '/api/v1/queue')
+        axios.get(`${host}/queue`)
             .then((response) => {
                 this.setState({ data: response.data });
-                console.log(response.data);
+                console.log('response', response.data);
             });
         const user = await window.localStorage.getItem('user');
         const skill = await window.localStorage.getItem('skill');
@@ -64,9 +59,14 @@ class Skills extends Component {
         console.log(this.state.activeItem)
     }
 
+    logout = () => {
+        window.localStorage.clear()
+        window.location.href = '/login';
+    }
+
     render() {
         const AllCards = this.state.data
-            .filter(item => !item.mentored && item.skill === this.state.skill)
+            // .filter(item => !item.mentored && item.skill === this.state.skill)
             .map((SingleCard) =>
                 <Col md={6} sm={6} xs={12} key={SingleCard.name}>
                     <div className="rounded-card" onClick={() => this.open(SingleCard.skill)}>
@@ -106,8 +106,9 @@ class Skills extends Component {
                     <Nav>
                         <NavItem eventKey={1} href="/skills">Skills</NavItem>
                         <NavItem eventKey={2} href="/dashboard">Dashboard</NavItem>
-                        <NavItem eventKey={2} href="/queue">Queue</NavItem>
-                        <NavItem eventKey={2} href="/queue">| {this.state.user} : {this.state.skill} |</NavItem>
+                        <NavItem eventKey={3} href="/queue">Queue</NavItem>
+                        <NavItem eventKey={4} href="/queue">| {this.state.user} : {this.state.skill} |</NavItem>
+                        <NavItem eventKey={5} onClick={() => this.logout()}>Logout</NavItem>
                     </Nav>
                 </Navbar>
                 <div className="container card-container">

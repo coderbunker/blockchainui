@@ -3,12 +3,13 @@ import { Form, FormControl, FormGroup, Radio, Button, ControlLabel } from 'react
 
 import axios from 'axios';
 
-const host = 'http://10.1.2.186:3000/api/v1';
+import { host } from '../host.js';
+
 
 export default class LoginForm extends React.Component {
   constructor(){
     super();
-    this.onChange = this.onChange.bind(this)
+    // this.onChange = this.onChange.bind(this)
     this.state = {
       username: '',
       users: [],
@@ -22,21 +23,21 @@ export default class LoginForm extends React.Component {
   componentWillMount() {
     axios.get(`${host}/users`)
       .then(response => {
-        this.setState({ users: response.data.users })
+        this.setState({ users: response.data })
         console.log(this.state.users);
       });
-    axios.get('http://10.1.2.186:3000/api/v1/skills')
+    axios.get(`${host}/skills`)
       .then((response) => {
         this.setState({ skills: response.data })
         console.log(this.state.skills);
       });
   }
   
-  onChange = (e) => {
-      this.setState({
-        [e.target.name]: e.target.value
-      })
-  }
+  // onChange = (e) => {
+  //     this.setState({
+  //       [e.target.name]: e.target.value
+  //     })
+  // }
 
   getSkill(e) {
     this.setState({ selectedSkill: e.target.value });
@@ -49,6 +50,7 @@ export default class LoginForm extends React.Component {
 
   login(e) {
     e.preventDefault();
+    console.log(this.state.selectedSkill, this.state.selectedUser);
     axios.post(`${host}/register/${this.state.selectedUser}/${this.state.selectedSkill}`)
       .then((response) => {
         window.localStorage.setItem('user', this.state.selectedUser);
@@ -62,15 +64,13 @@ export default class LoginForm extends React.Component {
     return (
       <Form 
       horizontal 
-      // method="post" 
-      // action={"http://localhost:3000/api/v1/login/"+this.state.username}
       onSubmit={(e) => this.login(e)}
     >
       <FormGroup controlId="formControlsSelectUser">
         <ControlLabel>Name</ControlLabel>
           <FormControl componentClass="select" placeholder="select" onChange={(e) => this.getUser(e)}>
           <option value="select">Select your name</option>
-            {this.state.users.map(data => <option value={data.user} key={data.user}>{data.user}</option>)}
+            {this.state.users.map(data => <option value={data} key={data}>{data}</option>)}
         </FormControl>
       </FormGroup>
       <FormGroup controlId="formControlsSelectSkill">

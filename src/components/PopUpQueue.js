@@ -3,7 +3,7 @@ import { Modal, Button, Media, Col, DropdownButton, MenuItem } from 'react-boots
 
 import axios from 'axios';
 
-const host = 'http://10.1.2.186:3000/api/v1';
+import { host } from '../host.js';
 
 export default class PopUp extends React.Component {
     constructor(props) {
